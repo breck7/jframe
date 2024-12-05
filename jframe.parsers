@@ -3,6 +3,6 @@ jframeMetaTagsParser
  extends metaTagsParser
  javascript
   buildHtml() {
-    const jframe = `<meta property="fc:frame" content='{"version":"next","imageUrl":"https://placehold.co/1200x800","button":{"title":"Demo Frame","action":{"type":"launch_frame","name":"Frame Demo","url":"https://example.com/frame","splashImageUrl":"https://placehold.co/200","splashBackgroundColor":"#f5f5f5"}}}' />`
+    const jframe = `<meta property="fc:frame" content='{&quot;version&quot;:&quot;next&quot;,&quot;imageUrl&quot;:&quot;https://jframe.breckyunits.com/splash.png&quot;,&quot;button&quot;:{&quot;title&quot;:&quot;Play&quot;,&quot;action&quot;:{&quot;type&quot;:&quot;launch_frame&quot;,&quot;name&quot;:&quot;JFrame&quot;,&quot;url&quot;:&quot;https://jframe.breckyunits.com&quot;,&quot;splashImageUrl&quot;:&quot;https://jframe.breckyunits.com/splash.png&quot;,&quot;splashBackgroundColor&quot;:&quot;purple&quot;}}}' />`
     return super.buildHtml().replace("</head>", jframe + "</head>")
   }
