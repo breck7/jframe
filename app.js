@@ -1,89 +1,91 @@
-const main = () => {
-  // Get UI elements
-  const statusDiv = document.getElementById("status");
-  const contextDiv = document.getElementById("contextData");
-  const buttons = ["contextBtn", "urlBtn", "closeBtn", "testBtn"].map((id) =>
-    document.getElementById(id),
-  );
-
-  let isSDKLoaded = false;
-
-  // Enable all buttons
-  function enableButtons() {
-    buttons.forEach((btn) => (btn.disabled = false));
+class App {
+  constructor() {
+    this.statusDiv = document.getElementById("status");
+    this.contextDiv = document.getElementById("contextData");
+    this.buttons = ["contextBtn", "urlBtn", "closeBtn", "testBtn"].map((id) =>
+      document.getElementById(id)
+    );
+    this.isSDKLoaded = false;
   }
 
-  // Initialize frame
-  async function init() {
+  setStatus(message) {
+    if (this.statusDiv) {
+      this.statusDiv.innerText = message;
+    }
+  }
+
+  enableButtons() {
+    this.buttons.forEach((btn) => {
+      if (btn) btn.disabled = false;
+    });
+  }
+
+  async start() {
     try {
       await frame.actions.ready();
-      isSDKLoaded = true;
-      statusDiv.innerText = "Frame is ready!";
-      enableButtons();
-
-      // Set up button click listener
+      this.isSDKLoaded = true;
+      this.setStatus("Frame is ready!");
+      this.enableButtons();
+      
       frame.on("primaryButtonClicked", () => {
-        statusDiv.innerText = "Primary button was clicked!";
+        this.setStatus("Primary button was clicked!");
       });
     } catch (error) {
-      statusDiv.innerText = "Error initializing frame: " + error.message;
+      this.setStatus(`Error initializing frame: ${error.message}`);
     }
   }
 
-  // Get and display frame context
-  async function getContext() {
-    if (!isSDKLoaded) return;
+  async getContext() {
+    if (!this.isSDKLoaded) return;
     try {
       const context = await frame.context;
-      contextDiv.innerHTML = `
-                    <h3>Frame Context:</h3>
-                    <pre>${JSON.stringify(context, null, 2)}</pre>
-                `;
+      if (this.contextDiv) {
+        this.contextDiv.innerHTML = `
+          <h3>Frame Context:</h3>
+          <pre>${JSON.stringify(context, null, 2)}</pre>
+        `;
+      }
     } catch (error) {
-      statusDiv.innerText = "Error getting context: " + error.message;
+      this.setStatus(`Error getting context: ${error.message}`);
     }
   }
 
-  // Open external URL
-  function openUrl() {
-    if (!isSDKLoaded) return;
+  openUrl() {
+    if (!this.isSDKLoaded) return;
     try {
       frame.actions.openUrl("https://www.farcaster.xyz");
-      statusDiv.innerText = "Opening URL...";
+      this.setStatus("Opening URL...");
     } catch (error) {
-      statusDiv.innerText = "Error opening URL: " + error.message;
+      this.setStatus(`Error opening URL: ${error.message}`);
     }
   }
 
-  // Close the frame
-  function closeFrame() {
-    if (!isSDKLoaded) return;
+  closeFrame() {
+    if (!this.isSDKLoaded) return;
     try {
       frame.actions.close();
-      statusDiv.innerText = "Closing frame...";
+      this.setStatus("Closing frame...");
     } catch (error) {
-      statusDiv.innerText = "Error closing frame: " + error.message;
+      this.setStatus(`Error closing frame: ${error.message}`);
     }
   }
 
-  // Test the primary button functionality
-  function testPrimaryButton() {
-    if (!isSDKLoaded) return;
+  testPrimaryButton() {
+    if (!this.isSDKLoaded) return;
     try {
       frame.actions.setPrimaryButton({
         text: "Click Me!",
         loading: false,
         disabled: false,
       });
-      statusDiv.innerText = "Primary button set - try clicking it!";
+      this.setStatus("Primary button set - try clicking it!");
     } catch (error) {
-      statusDiv.innerText = "Error setting primary button: " + error.message;
+      this.setStatus(`Error setting primary button: ${error.message}`);
     }
   }
-};
+}
 
-// Initialize the app when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
-  main();
-  jframe.sdk.actions.ready();
+  window.app = new App();
+  window.app.start();
 });
