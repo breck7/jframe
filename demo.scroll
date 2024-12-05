@@ -7,14 +7,14 @@ metaTags
  <h1>Farcaster Frames v2 Demo</h1>
  <div class="status" id="status">Waiting for frame to load...</div>
  <div>
- <button id="contextBtn" onclick="getContext()" disabled>
+ <button id="contextBtn" onclick="app.getContext()" disabled>
  Show Context
  </button>
- <button id="urlBtn" onclick="openUrl()" disabled>Open URL</button>
- <button id="closeBtn" onclick="closeFrame()" disabled>
+ <button id="urlBtn" onclick="app.openUrl()" disabled>Open URL</button>
+ <button id="closeBtn" onclick="app.closeFrame()" disabled>
  Close Frame
  </button>
- <button id="testBtn" onclick="testPrimaryButton()" disabled>
+ <button id="testBtn" onclick="app.testPrimaryButton()" disabled>
  Test Primary Button
  </button>
  </div>
