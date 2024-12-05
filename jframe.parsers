@@ -1,0 +1,8 @@
+jframeMetaTagsParser
+ cueFromId
+ extends metaTagsParser
+ javascript
+  buildHtml() {
+    const jframe = `<meta property="fc:frame" content='{"version":"next","imageUrl":"https://placehold.co/1200x800","button":{"title":"Demo Frame","action":{"type":"launch_frame","name":"Frame Demo","url":"https://example.com/frame","splashImageUrl":"https://placehold.co/200","splashBackgroundColor":"#f5f5f5"}}}' />`
+    return super.buildHtml().replace("</head>", jframe + "</head>")
+  }

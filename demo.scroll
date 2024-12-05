@@ -1,7 +1,8 @@
 buildHtml
 style.css
+jframe.parsers
 title Simple Farcaster Frames v2 Demo
-metaTags
+jframeMetaTags
 
 <div class="container">
  <h1>Farcaster Frames v2 Demo</h1>
