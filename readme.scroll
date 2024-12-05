@@ -1,4 +1,5 @@
 buildTxt readme.md
+buildHtml index.html
 
 # JFrame
 
