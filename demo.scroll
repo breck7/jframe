@@ -1,0 +1,26 @@
+buildHtml
+style.css
+title Simple Farcaster Frames v2 Demo
+metaTags
+
+
+<div class="container">
+<h1>Farcaster Frames v2 Demo</h1>
+<div class="status" id="status">Waiting for frame to load...</div>
+<div>
+<button id="contextBtn" onclick="getContext()" disabled>
+Show Context
+</button>
+<button id="urlBtn" onclick="openUrl()" disabled>Open URL</button>
+<button id="closeBtn" onclick="closeFrame()" disabled>
+Close Frame
+</button>
+<button id="testBtn" onclick="testPrimaryButton()" disabled>
+Test Primary Button
+</button>
+</div>
+<div id="contextData"></div>
+</div>
+
+jframe.js
+frame.js
