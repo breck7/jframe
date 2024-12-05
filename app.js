@@ -20,14 +20,18 @@ class App {
     });
   }
 
+  get sdk() {
+    return jframe.sdk
+  }
+
   async start() {
     try {
-      await jframe.actions.ready();
+      await this.sdk.actions.ready();
       this.isSDKLoaded = true;
       this.setStatus("Frame is ready!");
       this.enableButtons();
       
-      jframe.on("primaryButtonClicked", () => {
+      this.sdk.on("primaryButtonClicked", () => {
         this.setStatus("Primary button was clicked!");
       });
     } catch (error) {
@@ -38,7 +42,7 @@ class App {
   async getContext() {
     if (!this.isSDKLoaded) return;
     try {
-      const context = await jframe.context;
+      const context = await this.sdk.context;
       if (this.contextDiv) {
         this.contextDiv.innerHTML = `
           <h3>Frame Context:</h3>
@@ -53,7 +57,7 @@ class App {
   openUrl() {
     if (!this.isSDKLoaded) return;
     try {
-      jframe.actions.openUrl("https://www.farcaster.xyz");
+      this.sdk.actions.openUrl("https://www.farcaster.xyz");
       this.setStatus("Opening URL...");
     } catch (error) {
       this.setStatus(`Error opening URL: ${error.message}`);
@@ -63,7 +67,7 @@ class App {
   closeFrame() {
     if (!this.isSDKLoaded) return;
     try {
-      jframe.actions.close();
+      this.sdk.actions.close();
       this.setStatus("Closing frame...");
     } catch (error) {
       this.setStatus(`Error closing frame: ${error.message}`);
@@ -73,7 +77,7 @@ class App {
   testPrimaryButton() {
     if (!this.isSDKLoaded) return;
     try {
-      jframe.actions.setPrimaryButton({
+      this.sdk.actions.setPrimaryButton({
         text: "Click Me!",
         loading: false,
         disabled: false,
