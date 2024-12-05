@@ -3,7 +3,6 @@ style.css
 title Simple Farcaster Frames v2 Demo
 metaTags
 
-
 <div class="container">
  <h1>Farcaster Frames v2 Demo</h1>
  <div class="status" id="status">Waiting for frame to load...</div>
